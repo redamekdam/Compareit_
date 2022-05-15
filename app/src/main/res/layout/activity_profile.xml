@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    tools:context=".Home">
+    tools:context=".Profile">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Register"
+        android:text="@string/app_name"
         android:textSize="50sp"
         android:layout_centerInParent="true"/>
 
@@ -23,6 +21,7 @@
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navbar"
         android:layout_alignParentBottom="true"/>
+
 
 
 </RelativeLayout>

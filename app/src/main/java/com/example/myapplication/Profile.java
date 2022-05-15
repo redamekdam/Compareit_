@@ -9,19 +9,16 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.Objects;
-
 @SuppressWarnings("ALL")
-public class Home extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Objects.requireNonNull(getSupportActionBar()).hide();
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_profile);
         bottomNavigationView = findViewById(R.id.nav_bar);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setSelectedItemId(R.id.profile);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -33,10 +30,11 @@ public class Home extends AppCompatActivity {
 
                         return true;
                     case R.id.home:
+                        startActivity(new Intent(getApplicationContext(),Home.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(),Profile.class));
-                        overridePendingTransition(0,0);
+
 
                         return true;
 
@@ -44,6 +42,5 @@ public class Home extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 }

@@ -6,4 +6,7 @@
     <string name="User">UserName</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="profile">Profile</string>
 </resources>

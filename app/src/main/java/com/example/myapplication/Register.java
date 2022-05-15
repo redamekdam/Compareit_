@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
@@ -54,6 +55,7 @@ public class Register extends AppCompatActivity {
         String user= inputuser.getText().toString();
         String email= inputemail.getText().toString();
         String password= inputpassword.getText().toString();
+        String username= inputuser.getText().toString();
         if(user.isEmpty()){
             inputuser.setError("Enter a username");
         }else if(!email.matches(emailPattern)){
@@ -61,7 +63,7 @@ public class Register extends AppCompatActivity {
         }else if(password.isEmpty() || password.length()<6){
             inputpassword.setError("Enter a valid password");
         }else{
-            progressDialog.setMessage("Regestration ..");
+            progressDialog.setMessage("Registration ..");
             progressDialog.setTitle("REGISTRATION");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
@@ -69,10 +71,23 @@ public class Register extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        progressDialog.dismiss();
-                        SendUserToNextActivity();
-                        Toast.makeText(Register.this, "Restration completed", Toast.LENGTH_SHORT).show();
-                    }else{
+                        User user = new User(username,email);
+                        FirebaseDatabase.getInstance().getReference("Users")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    progressDialog.dismiss();
+                                    SendUserToNextActivity();
+                                    Toast.makeText(Register.this, "Registration completed", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    progressDialog.dismiss();
+                                    Toast.makeText(Register.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                        }else{
                         progressDialog.dismiss();
                         Toast.makeText(Register.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
                     }
@@ -86,5 +101,7 @@ public class Register extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
+
 }
 
