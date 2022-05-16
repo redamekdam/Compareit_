@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Objects;
 
 public class Register extends AppCompatActivity {
-    EditText inputuser ;
+    EditText inputuser,inputage ;
     EditText inputemail ;
     EditText inputpassword ;
     ProgressDialog progressDialog;
@@ -35,6 +35,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Objects.requireNonNull(getSupportActionBar()).hide();
+        inputage=findViewById(R.id.inputage);
         inputuser = findViewById(R.id.inputuser);
         inputemail = findViewById(R.id.inputemail);
         inputpassword = findViewById(R.id.inputpassword);
@@ -56,13 +57,17 @@ public class Register extends AppCompatActivity {
         String email= inputemail.getText().toString();
         String password= inputpassword.getText().toString();
         String username= inputuser.getText().toString();
+        String age= inputage.getText().toString();
         if(user.isEmpty()){
-            inputuser.setError("Enter a username");
+            inputuser.setError("Enter your fullname");
         }else if(!email.matches(emailPattern)){
             inputemail.setError("Enter a valid mail");
         }else if(password.isEmpty() || password.length()<6){
             inputpassword.setError("Enter a valid password");
-        }else{
+        }else if(age.isEmpty()){
+            inputage.setError("Enter your age");
+        }
+        else{
             progressDialog.setMessage("Registration ..");
             progressDialog.setTitle("REGISTRATION");
             progressDialog.setCanceledOnTouchOutside(false);
@@ -71,7 +76,7 @@ public class Register extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        User user = new User(username,email);
+                        User user = new User(username,email,password,age);
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

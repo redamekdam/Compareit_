@@ -47,7 +47,8 @@
         android:id="@+id/inputpassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
+        android:autofillHints=""
         android:background="@drawable/input_bg"
         android:ems="10"
         android:hint="@string/password"
@@ -61,14 +62,13 @@
         app:layout_constraintEnd_toEndOf="@+id/inputemail"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/inputemail"
-        app:layout_constraintTop_toBottomOf="@+id/inputemail"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/inputemail" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="125dp"
         android:layout_height="59dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/input_bg"
         android:text="@string/Log"
         android:textColor="@color/black"
@@ -84,9 +84,20 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintVertical_bias="0.086" />
+
+    <TextView
+        android:id="@+id/createaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create new account"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="@+id/inputpassword"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/inputpassword"
+        app:layout_constraintTop_toBottomOf="@+id/inputpassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

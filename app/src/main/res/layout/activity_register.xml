@@ -49,7 +49,7 @@
         android:id="@+id/inputemail"
         android:layout_width="319dp"
         android:layout_height="48dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="148dp"
         android:autofillHints=""
         android:background="@drawable/input_bg"
         android:ems="10"
@@ -69,7 +69,7 @@
         android:id="@+id/inputpassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:autofillHints=""
         android:background="@drawable/input_bg"
         android:ems="10"
@@ -86,18 +86,46 @@
         app:layout_constraintStart_toStartOf="@+id/inputemail"
         app:layout_constraintTop_toBottomOf="@+id/inputemail" />
 
+    <EditText
+        android:id="@+id/inputage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:autofillHints=""
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:hint="@string/Age"
+        android:inputType="number"
+        android:paddingLeft="20dp"
+        android:paddingTop="13dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="13dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/inputemail"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputemail"
+        app:layout_constraintTop_toBottomOf="@+id/inputemail"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="125dp"
         android:layout_height="59dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginEnd="96dp"
+
+
+        android:layout_marginBottom="108dp"
         android:background="@drawable/input_bg"
         android:text="@string/Register"
         android:textColor="@color/black"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/inputpassword"
-        app:layout_constraintStart_toStartOf="@+id/inputpassword"
-        app:layout_constraintTop_toBottomOf="@+id/inputpassword"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintHorizontal_bias="0.989"
+        app:layout_constraintStart_toStartOf="@+id/inputage"
+        app:layout_constraintTop_toBottomOf="@+id/inputage"
+        app:layout_constraintVertical_bias="0.852" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

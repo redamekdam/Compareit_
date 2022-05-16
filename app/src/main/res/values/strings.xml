@@ -1,12 +1,14 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">COMPARE IT</string>
     <string name="Log">LOGIN </string>
     <string name="Register">REGISTER  </string>
     <string name="log">Log In</string>
-    <string name="User">UserName</string>
+    <string name="User">FullName</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="home">Home</string>
     <string name="favorite">Favorite</string>
     <string name="profile">Profile</string>
+    <string name="age">age</string>
+    <string name="Age">Age</string>
 </resources>

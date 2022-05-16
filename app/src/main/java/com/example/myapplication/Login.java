@@ -26,7 +26,7 @@ import java.util.Objects;
 
 public class Login extends AppCompatActivity {
     EditText inputemail;
-    TextView forgotText;
+    TextView forgotText,createnewaccount;
     EditText inputpassword;
     ProgressDialog progressDialog;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -40,12 +40,19 @@ public class Login extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_login);
         forgotText=findViewById(R.id.forgotText);
+        createnewaccount=findViewById(R.id.createaccount);
         inputemail = findViewById(R.id.inputemail);
         inputpassword = findViewById(R.id.inputpassword);
         progressDialog = new ProgressDialog(this);
         login = findViewById(R.id.login);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
+        createnewaccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this,Register.class));
+            }
+        });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
