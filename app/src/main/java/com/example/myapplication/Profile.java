@@ -39,10 +39,12 @@ import java.util.concurrent.locks.ReadWriteLock;
 public class Profile extends AppCompatActivity {
     Uri imageUri;
     BottomNavigationView bottomNavigationView;
+
     ImageView imageView;
     FirebaseUser user;
     FirebaseDatabase database;
     DatabaseReference reference;
+    ProgressDialog progressDialog;
     FirebaseStorage storage;
     StorageReference storageReference;
     Button logout;
@@ -53,6 +55,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_profile);
+        progressDialog = new ProgressDialog(this);
         Intent intent=getIntent();
         String email=intent.getStringExtra("email");
         final   TextView  TextUser= (TextView) findViewById(R.id.welcome);
@@ -101,8 +104,15 @@ public class Profile extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.setMessage("LOG OUT ...");
+                progressDialog.setTitle("LOG OUT");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(Profile.this,Login.class));
+
+
+
             }
         });
 

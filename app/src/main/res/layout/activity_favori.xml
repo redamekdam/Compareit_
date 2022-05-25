@@ -5,12 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Favori">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/log"
-        android:textSize="50sp"
-        android:layout_centerInParent="true"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_bar"
@@ -21,5 +15,13 @@
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navbar"
         android:layout_alignParentBottom="true"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="768dp"
+        android:layout_above="@+id/nav_bar"
+        android:layout_marginBottom="53dp" />
+
 
 </RelativeLayout>
