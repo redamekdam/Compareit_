@@ -29,7 +29,7 @@ import java.util.Objects;
 @SuppressWarnings("ALL")
 public class Favori extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    String JSON_URL = "https://run.mocky.io/v3/18d10197-bd17-4452-9921-c22d8713c27b";
+    String JSON_URL = "https://serpapi.com/search.json?engine=walmart&query=Coffee&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
     List<ProductModelClass> productList;
     RecyclerView recyclerView;
 
@@ -112,13 +112,13 @@ public class Favori extends AppCompatActivity {
     protected void onPostExecute(String s) {
         try {
             JSONObject jsonObject=new JSONObject(s);
-            JSONArray jsonArray=jsonObject.getJSONArray("data");
+            JSONArray jsonArray=jsonObject.getJSONArray("organic_results");
             for (int i =0 ;i<jsonArray.length();i++){
                 JSONObject jsonObject1=jsonArray.getJSONObject(i);
                 ProductModelClass modelClass=new ProductModelClass();
                 modelClass.setTitle(jsonObject1.getString("title"));
-                modelClass.setPrice(jsonObject1.getString("price"));
-                modelClass.setImage(jsonObject1.getString("image"));
+                modelClass.setPrice(jsonObject1.getString("offer_price"));
+                modelClass.setImage(jsonObject1.getString("thumbnail"));
                 productList.add(modelClass);
 
 
