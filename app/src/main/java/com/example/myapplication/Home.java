@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -37,22 +40,34 @@ import java.util.Objects;
 
 @SuppressWarnings("ALL")
 public class Home extends AppCompatActivity {
+    String SearchContext="Iphone13pro";
     BottomNavigationView bottomNavigationView;
-    String recherche = "TV";
-    String JSON_URL="https://serpapi.com/search.json?q="+recherche+"&tbm=shop&location=Dallas&hl=en&gl=us&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
-    List<ProductModelClass> productList;
-    RecyclerView recycler;
-    RequestQueue requestQueue;
-
-
+    Button button;
+    EditText search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_home);
-        productList=new ArrayList<>();
-        requestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
-        recycler=findViewById(R.id.recycler);
+        button=findViewById(R.id.search);
+        search=findViewById(R.id.inputsearch);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String searchBox = search.getText().toString().trim();
+                if(TextUtils.isEmpty(searchBox)){
+                    search.setError("What are you looking for");
+                    return;
+                }
+                search = findViewById(R.id.inputsearch);
+                String searchText = search.getText().toString();
+                Intent intent = new Intent(Home.this,Favori.class);
+                intent.putExtra("SearchContext",searchText);
+                startActivity(intent);
+
+            }
+        });
         bottomNavigationView = findViewById(R.id.nav_bar);
         bottomNavigationView.setSelectedItemId(R.id.home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -77,57 +92,12 @@ public class Home extends AppCompatActivity {
                 return false;
             }
         });
-        FechData();
 
 
-    }
-
-    private void FechData() {
-        String s ="tv";
-        String url = "https://serpapi.com/search.json?q="+s+"&tbm=shop&location=Dallas&hl=en&gl=us&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject arg0) {
-                try {
-                    JSONArray array = arg0.getJSONArray("shopping_results");
-                    for (int i = 0; i < 10; i++){
-                        JSONObject jsonObject = array.getJSONObject(i);
-                        ProductModelClass modelClass=new ProductModelClass();
-                        modelClass.setTitle(jsonObject.getString("title"));
-                        modelClass.setPrice(jsonObject.getString("price"));
-                        modelClass.setStore(jsonObject.getString("source"));
-                        modelClass.setRating(jsonObject.getString("rating"));
-                        modelClass.setImage(jsonObject.getString("thumbnail"));
-                        productList.add(modelClass);
-
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError arg0) {
-                Toast.makeText(Home.this, arg0.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        requestQueue.add(request);
-        PutDataIntoRecyclerView(productList);
 
     }
 
-    private void PutDataIntoRecyclerView(List<ProductModelClass> productList) {
-        Adaptry adaptry=new Adaptry(this,productList);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-        recycler.setAdapter(adaptry);
-    }
+
 
 
 }

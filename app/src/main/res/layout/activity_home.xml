@@ -1,27 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/ic_background"
     tools:context=".Home">
+
+
+    <EditText
+        android:id="@+id/inputsearch"
+        android:layout_width="319dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="332dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:background="@drawable/input_bg"
+        android:hint="  SEARCH FOR A PRODUCT"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/search"
+        android:layout_width="125dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/input_bg"
+        android:text="SEARCH"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/nav_bar"
+        app:layout_constraintEnd_toEndOf="@+id/inputsearch"
+        app:layout_constraintStart_toStartOf="@+id/inputsearch"
+        app:layout_constraintTop_toBottomOf="@+id/inputsearch"
+        app:layout_constraintVertical_bias="0.073" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_bar"
         android:layout_width="match_parent"
         android:layout_height="70sp"
+        android:layout_alignParentBottom="true"
         app:itemBackground="@color/white"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:menu="@menu/menu_navbar"
-        android:layout_alignParentBottom="true"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="820dp"
-        android:layout_above="@+id/nav_bar"
-        android:layout_marginBottom="1dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputsearch"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/menu_navbar" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

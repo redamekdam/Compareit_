@@ -10,13 +10,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import com.android.volley.RequestQueue;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,11 +36,11 @@ import java.util.Objects;
 @SuppressWarnings("ALL")
 public class Favori extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    String s ="galaxy s20";
-    String JSON_URL = "https://serpapi.com/search.json?q="+s+"&tbm=shop&location=Dallas&hl=en&gl=us&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
     List<ProductModelClass> productList;
     RecyclerView recyclerView;
-    SearchView searchView;
+    RequestQueue requestQueue;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +49,9 @@ public class Favori extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         productList=new ArrayList<>();
         recyclerView=findViewById(R.id.recyclerView);
-        Favori.GetData getData=new Favori.GetData();
-        String j ="iphone 13";
-        String JSON_URL = "https://serpapi.com/search.json?q="+j+"&tbm=shop&location=Dallas&hl=en&gl=us&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
-        getData.execute();
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        requestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
+        FechData();
         bottomNavigationView = findViewById(R.id.nav_bar);
         bottomNavigationView.setSelectedItemId(R.id.favorite);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,8 +60,6 @@ public class Favori extends AppCompatActivity {
                 switch (item.getItemId())
                 {
                     case R.id.favorite:
-
-
                         return true;
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(),Home.class));
@@ -73,74 +75,47 @@ public class Favori extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 
+    private void FechData() {
+        Intent i = getIntent();
+        String SearchContext = i.getStringExtra("SearchContext");
+        String url = "https://serpapi.com/search.json?q="+SearchContext+"&tbm=shop&location=Dallas&hl=en&gl=us&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
-    public class GetData extends AsyncTask<String,String,String> {
+            @Override
+            public void onResponse(JSONObject arg0) {
+                try {
+                    JSONArray array = arg0.getJSONArray("shopping_results");
+                    for (int i = 0; i < 10; i++){
+                        JSONObject jsonObject = array.getJSONObject(i);
+                        ProductModelClass modelClass=new ProductModelClass();
+                        modelClass.setTitle(jsonObject.getString("title"));
+                        modelClass.setPrice(jsonObject.getString("price"));
+                        modelClass.setStore(jsonObject.getString("source"));
+                        modelClass.setRating(jsonObject.getString("rating"));
+                        modelClass.setImage(jsonObject.getString("thumbnail"));
+                        productList.add(modelClass);
 
-    @Override
-    protected String doInBackground(String... strings) {
-        String current= "";
-        try {
-            URL url;
-            HttpURLConnection urlConnection=null;
-            try {
-                url=new URL(JSON_URL);
-                urlConnection=(HttpURLConnection) url.openConnection();
-                InputStream is=urlConnection.getInputStream();
-                InputStreamReader isr=new InputStreamReader(is);
-                int data=isr.read();
-                while(data!=-1){
-                    current+=(char)data;
-                    data=isr.read();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                return current;
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }finally {
-                if (urlConnection!=null){
-                    urlConnection.disconnect();
-                }
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return current;
-    }
-
-    @Override
-    protected void onPostExecute(String s) {
-        try {
-            JSONObject jsonObject=new JSONObject(s);
-            JSONArray jsonArray=jsonObject.getJSONArray("shopping_results");
-            for (int i =0 ;i<6;i++){
-                JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                ProductModelClass modelClass=new ProductModelClass();
-                modelClass.setTitle(jsonObject1.getString("title"));
-                modelClass.setPrice(jsonObject1.getString("price"));
-                modelClass.setStore(jsonObject1.getString("source"));
-                modelClass.setRating(jsonObject1.getString("rating"));
-                modelClass.setImage(jsonObject1.getString("thumbnail"));
-                productList.add(modelClass);
+                Adaptry adapter = new Adaptry(Favori.this , productList);
+                recyclerView.setAdapter(adapter);
 
 
             }
+        }, new Response.ErrorListener() {
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        PutDataIntoRecyclerView(productList);
-    }
+            @Override
+            public void onErrorResponse(VolleyError arg0) {
+                Toast.makeText(Favori.this, arg0.getMessage(), Toast.LENGTH_SHORT).show();
 
-}
-    private void  PutDataIntoRecyclerView(List<ProductModelClass> productList){
-        Adaptry adaptry=new Adaptry(this,productList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adaptry);
+            }
+        });
+        requestQueue.add(request);
     }
 }
