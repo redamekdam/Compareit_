@@ -114,7 +114,7 @@ public class Login extends AppCompatActivity {
                     if(task.isSuccessful()){
                         progressDialog.dismiss();
                         SendUserToNextActivity();
-                        Toast.makeText(Login.this, "Login with succes", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Login with success", Toast.LENGTH_SHORT).show();
 
                     }else{
                         progressDialog.dismiss();

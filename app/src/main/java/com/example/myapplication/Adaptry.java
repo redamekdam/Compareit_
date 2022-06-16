@@ -36,6 +36,9 @@ public class Adaptry extends RecyclerView.Adapter<Adaptry.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(mData.get(position).getTitle());
         holder.price.setText(mData.get(position).getPrice());
+        holder.store.setText(mData.get(position).getStore());
+        holder.rating.setText(mData.get(position).getRating());
+
         Glide.with(mContext)
                 .load(mData.get(position).getImage())
                 .into(holder.image);
@@ -50,8 +53,9 @@ public class Adaptry extends RecyclerView.Adapter<Adaptry.MyViewHolder> {
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView title,price;
+        TextView title,price,store,rating;
         ImageView image;
+
 
 
 
@@ -59,6 +63,8 @@ public class Adaptry extends RecyclerView.Adapter<Adaptry.MyViewHolder> {
             super(itemView);
             title=itemView.findViewById(R.id.name_url);
             price=itemView.findViewById(R.id.price_url);
+            store=itemView.findViewById(R.id.store_url);
+            rating=itemView.findViewById(R.id.rate_url);
             image=itemView.findViewById(R.id.image_url);
         }
     }

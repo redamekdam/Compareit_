@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,9 +30,11 @@ import java.util.Objects;
 @SuppressWarnings("ALL")
 public class Favori extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    String JSON_URL = "https://serpapi.com/search.json?engine=walmart&query=Coffee&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
+    String s ="galaxy s20";
+    String JSON_URL = "https://serpapi.com/search.json?q="+s+"&tbm=shop&location=Dallas&hl=en&gl=us&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
     List<ProductModelClass> productList;
     RecyclerView recyclerView;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class Favori extends AppCompatActivity {
         productList=new ArrayList<>();
         recyclerView=findViewById(R.id.recyclerView);
         Favori.GetData getData=new Favori.GetData();
+        String j ="iphone 13";
+        String JSON_URL = "https://serpapi.com/search.json?q="+j+"&tbm=shop&location=Dallas&hl=en&gl=us&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
         getData.execute();
 
         bottomNavigationView = findViewById(R.id.nav_bar);
@@ -112,12 +117,14 @@ public class Favori extends AppCompatActivity {
     protected void onPostExecute(String s) {
         try {
             JSONObject jsonObject=new JSONObject(s);
-            JSONArray jsonArray=jsonObject.getJSONArray("organic_results");
-            for (int i =0 ;i<jsonArray.length();i++){
+            JSONArray jsonArray=jsonObject.getJSONArray("shopping_results");
+            for (int i =0 ;i<6;i++){
                 JSONObject jsonObject1=jsonArray.getJSONObject(i);
                 ProductModelClass modelClass=new ProductModelClass();
                 modelClass.setTitle(jsonObject1.getString("title"));
-                modelClass.setPrice(jsonObject1.getString("offer_price"));
+                modelClass.setPrice(jsonObject1.getString("price"));
+                modelClass.setStore(jsonObject1.getString("source"));
+                modelClass.setRating(jsonObject1.getString("rating"));
                 modelClass.setImage(jsonObject1.getString("thumbnail"));
                 productList.add(modelClass);
 

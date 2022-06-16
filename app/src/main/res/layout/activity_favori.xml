@@ -16,12 +16,21 @@
         app:menu="@menu/menu_navbar"
         android:layout_alignParentBottom="true"/>
 
+    <SearchView
+        android:id="@+id/search_"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_above="@+id/recyclerView"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="100dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="768dp"
+        android:layout_height="580dp"
+
         android:layout_above="@+id/nav_bar"
-        android:layout_marginBottom="53dp" />
+        android:layout_marginBottom="1dp" />
 
 
 </RelativeLayout>

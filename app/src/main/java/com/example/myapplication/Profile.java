@@ -73,7 +73,6 @@ public class Profile extends AppCompatActivity {
         });
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
-
         user=FirebaseAuth.getInstance().getCurrentUser();
         reference=FirebaseDatabase.getInstance().getReference("Users");
         UserID=user.getUid();
