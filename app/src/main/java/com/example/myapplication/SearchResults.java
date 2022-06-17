@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,12 +36,12 @@ import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
-public class Favori extends AppCompatActivity {
+public class SearchResults extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     List<ProductModelClass> productList;
     RecyclerView recyclerView;
     RequestQueue requestQueue;
-
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -55,14 +56,12 @@ public class Favori extends AppCompatActivity {
         requestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
         FechData();
         bottomNavigationView = findViewById(R.id.nav_bar);
-        bottomNavigationView.setSelectedItemId(R.id.favorite);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
-                    case R.id.favorite:
-                        return true;
+
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(),Home.class));
                         overridePendingTransition(0,0);
@@ -71,6 +70,10 @@ public class Favori extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),Profile.class));
                         overridePendingTransition(0,0);
 
+                        return true;
+                    case R.id.Favorites:
+                        startActivity(new Intent(getApplicationContext(),Favorites.class));
+                        overridePendingTransition(0,0);
                         return true;
 
                 }
@@ -83,39 +86,44 @@ public class Favori extends AppCompatActivity {
     private void FechData() {
         Intent i = getIntent();
         String SearchContext = i.getStringExtra("SearchContext");
-        String url = "https://serpapi.com/search.json?q="+SearchContext+"&tbm=shop&hl=en&gl=us&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
+        SearchContext=SearchContext.replaceAll("\\s+","+");
+        String url = "https://serpapi.com/search.json?q="+SearchContext+"&tbm=shop&hl=en&gl=us&api_key=119849874229794268514dfaf7c8e8d1dbb62d41fa6a71fd426c71265c5d935f";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject arg0) {
                 try {
                     JSONArray array = arg0.getJSONArray("shopping_results");
-                    for (int i = 0; i < 10; i++){
+                    for (int i = 0; i < array.length(); i++){
                         JSONObject jsonObject = array.getJSONObject(i);
                         ProductModelClass modelClass=new ProductModelClass();
-                        modelClass.setTitle(jsonObject.getString("title"));
-                        modelClass.setPrice(jsonObject.getString("price"));
-                        modelClass.setStore(jsonObject.getString("source"));
-                        modelClass.setRating(jsonObject.getString("rating"));
-                        modelClass.setImage(jsonObject.getString("thumbnail"));
+                        if (jsonObject.has("title")){
+                            modelClass.setTitle(jsonObject.getString("title"));
+                        }if(jsonObject.has("price")){
+                            modelClass.setPrice(jsonObject.getString("price"));
+                        }if(jsonObject.has("source")){
+                            modelClass.setStore(jsonObject.getString("source"));
+                        }if(jsonObject.has("rating")){
+                            modelClass.setRating(jsonObject.getString("rating"));
+                        }if(jsonObject.has("link")){
+                            modelClass.setLink(jsonObject.getString("link"));
+                        }if(jsonObject.has("thumbnail")){
+                            modelClass.setImage(jsonObject.getString("thumbnail"));
+                        }
                         productList.add(modelClass);
-
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Adaptry adapter = new Adaptry(Favori.this , productList);
+                Adaptry adapter = new Adaptry(SearchResults.this , productList);
                 recyclerView.setAdapter(adapter);
-
-
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError arg0) {
-                Toast.makeText(Favori.this, arg0.getMessage(), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(SearchResults.this, arg0.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
         requestQueue.add(request);

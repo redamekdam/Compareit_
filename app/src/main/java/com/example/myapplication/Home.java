@@ -62,7 +62,7 @@ public class Home extends AppCompatActivity {
                 }
                 search = findViewById(R.id.inputsearch);
                 String searchText = search.getText().toString();
-                Intent intent = new Intent(Home.this,Favori.class);
+                Intent intent = new Intent(Home.this,SearchResults.class);
                 intent.putExtra("SearchContext",searchText);
                 startActivity(intent);
 
@@ -75,29 +75,20 @@ public class Home extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
-                    case R.id.favorite:
-                        startActivity(new Intent(getApplicationContext(),Favori.class));
-                        overridePendingTransition(0,0);
 
-                        return true;
                     case R.id.home:
                         return true;
                     case R.id.profile:
                         startActivity(new Intent(getApplicationContext(),Profile.class));
                         overridePendingTransition(0,0);
-
                         return true;
-
+                    case R.id.Favorites:
+                        startActivity(new Intent(getApplicationContext(),Favorites.class));
+                        overridePendingTransition(0,0);
+                        return true;
                 }
                 return false;
             }
         });
-
-
-
     }
-
-
-
-
 }

@@ -110,8 +110,6 @@ public class Profile extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(Profile.this,Login.class));
 
-
-
             }
         });
 
@@ -125,18 +123,16 @@ public class Profile extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
-                    case R.id.favorite:
-                        startActivity(new Intent(getApplicationContext(),Favori.class));
-                        overridePendingTransition(0,0);
 
-                        return true;
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(),Home.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:
-
-
+                        return true;
+                    case R.id.Favorites:
+                        startActivity(new Intent(getApplicationContext(),Favorites.class));
+                        overridePendingTransition(0,0);
                         return true;
 
                 }

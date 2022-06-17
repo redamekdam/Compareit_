@@ -3,6 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie - Copie/app/src/main/res/layout/activity_favorites.xml" value="0.18" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie - Copie/app/src/main/res/layout/activity_home.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie - Copie/app/src/main/res/layout/activity_product_details.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie - Copie/app/src/main/res/layout/fav_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie - Copie/app/src/main/res/layout/item.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie/app/src/main/res/layout/activity_favori.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie/app/src/main/res/layout/activity_favorites.xml" value="0.2" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie/app/src/main/res/layout/activity_main2.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie/app/src/main/res/layout/activity_product_details.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie/app/src/main/res/layout/fav_item.xml" value="0.1" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie/app/src/main/res/layout/item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1 - Copie - Copie/app/src/main/res/menu/menu_navbar.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1/app/src/main/res/drawable/shape.xml" value="0.1985" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1/app/src/main/res/drawable/star.xml" value="0.2115" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1/app/src/main/res/layout/activity_favori.xml" value="0.1286231884057971" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1/app/src/main/res/layout/activity_product_details.xml" value="0.22" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1/app/src/main/res/layout/item.xml" value="0.29411764705882354" />
+        <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it-v1/app/src/main/res/layout/product_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.112" />
         <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.115" />
         <entry key="..\:/Users/hiche/AndroidStudioProjects/Compare-it/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.115" />
