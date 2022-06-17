@@ -1,14 +1,15 @@
 package com.example.myapplication;
 
 public class ProductModelClass {
-    String title,price,store,image,rating;
+    String title,price,store,image,rating,link;
 
-    public ProductModelClass(String title, String price,String store, String image,String rating) {
+    public ProductModelClass(String title, String price,String store, String image,String rating,String link) {
         this.title = title;
         this.price = price;
         this.store = store;
         this.image = image;
         this.rating = rating;
+        this.link=link;
     }
 
     public ProductModelClass() {
@@ -48,5 +49,11 @@ public class ProductModelClass {
     }
     public void setRating(String rating) {
         this.rating = rating;
+    }
+    public String getLink() {
+        return link;
+    }
+    public void setLink(String link) {
+        this.link = link;
     }
 }

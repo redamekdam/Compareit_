@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class Favori extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favori);
         Objects.requireNonNull(getSupportActionBar()).hide();
+
         productList=new ArrayList<>();
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -81,7 +83,7 @@ public class Favori extends AppCompatActivity {
     private void FechData() {
         Intent i = getIntent();
         String SearchContext = i.getStringExtra("SearchContext");
-        String url = "https://serpapi.com/search.json?q="+SearchContext+"&tbm=shop&location=Dallas&hl=en&gl=us&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
+        String url = "https://serpapi.com/search.json?q="+SearchContext+"&tbm=shop&hl=en&gl=us&api_key=10e228ad129da5e65612ac2406e01c65837a61f16a2d8c0e55c369c476db2635";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
             @Override

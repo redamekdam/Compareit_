@@ -92,7 +92,7 @@
         android:id="@+id/createaccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't Have A Account ?"
+        android:text="CREATE AN ACCOUNT"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="@+id/inputpassword"

@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_baseline_home_24"/>
     <item android:id="@+id/favorite"
         android:title="@string/favorite"
-        android:icon="@drawable/ic_favorite"/>
+        android:icon="@drawable/result"/>
     <item android:id="@+id/profile"
         android:title="@string/profile"
         android:icon="@drawable/ic_profile"/>

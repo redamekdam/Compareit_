@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,7 @@ public class Register extends AppCompatActivity {
     EditText inputuser,inputage ;
     EditText inputemail ;
     EditText inputpassword ;
+    TextView already;
     ProgressDialog progressDialog;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     FirebaseAuth mAuth;
@@ -39,6 +41,13 @@ public class Register extends AppCompatActivity {
         inputuser = findViewById(R.id.inputuser);
         inputemail = findViewById(R.id.inputemail);
         inputpassword = findViewById(R.id.inputpassword);
+        already=findViewById(R.id.already);
+        already.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Register.this,Login.class));
+            }
+        });
         progressDialog = new ProgressDialog(this);
         button=findViewById(R.id.button);
         mAuth = FirebaseAuth.getInstance();
